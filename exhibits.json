@@ -1,6 +1,6 @@
 {
   "generated": "run `node scripts/build-gallery.mjs` to regenerate",
-  "count": 2,
+  "count": 14,
   "exhibits": [
     {
       "title": "The Proxy Trap",
@@ -22,6 +22,157 @@
       "path": "exhibits/reward-hacking/index.html"
     },
     {
+      "title": "Memorize or Generalize? (Grokking)",
+      "slug": "grokking-memorize-or-generalize",
+      "summary": "Step through a tiny network as it suddenly 'groks' a pattern, peeking inside its weights to see memorization become understanding.",
+      "topics": [
+        "interpretability",
+        "robustness"
+      ],
+      "author": {
+        "name": "Google PAIR",
+        "url": "https://pair.withgoogle.com"
+      },
+      "thumbnail": "https://pair.withgoogle.com/explorables/images/grokking.png",
+      "url": "https://pair.withgoogle.com/explorables/grokking/",
+      "license": "Apache-2.0",
+      "added": "2023-08-01",
+      "external": true
+    },
+    {
+      "title": "Detect Fakes",
+      "slug": "detect-fakes",
+      "summary": "Classify images as real or AI-generated, rate your confidence, and test how well humans actually spot deepfakes.",
+      "topics": [
+        "deepfakes",
+        "misinformation",
+        "evaluation"
+      ],
+      "author": {
+        "name": "MIT Media Lab & Kellogg School",
+        "url": "https://www.media.mit.edu"
+      },
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "url": "https://detectfakes.kellogg.northwestern.edu/",
+      "license": "All rights reserved",
+      "added": "2021-01-01",
+      "external": true
+    },
+    {
+      "title": "Measuring Fairness",
+      "slug": "measuring-fairness",
+      "summary": "Slide a model's decision threshold and watch fairness metrics collide, showing why you can't satisfy every notion at once.",
+      "topics": [
+        "fairness",
+        "bias",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Google PAIR (Adam Pearce)",
+        "url": "https://pair.withgoogle.com"
+      },
+      "thumbnail": "https://pair.withgoogle.com/explorables/images/measuring-fairness.png",
+      "url": "https://pair.withgoogle.com/explorables/measuring-fairness/",
+      "license": "Apache-2.0",
+      "added": "2020-05-01",
+      "external": true
+    },
+    {
+      "title": "Teachable Machine",
+      "slug": "teachable-machine",
+      "summary": "Train an image, sound or pose classifier from your webcam in minutes and feel firsthand how skewed data biases a model.",
+      "topics": [
+        "interpretability",
+        "bias",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Google",
+        "url": "https://teachablemachine.withgoogle.com/"
+      },
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "url": "https://teachablemachine.withgoogle.com/",
+      "license": "Apache-2.0",
+      "added": "2019-11-07",
+      "external": true
+    },
+    {
+      "title": "Survival of the Best Fit",
+      "slug": "survival-of-the-best-fit",
+      "summary": "Run a startup's hiring, then train an AI on your choices and watch it inherit and amplify your hidden biases.",
+      "topics": [
+        "bias",
+        "fairness",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Csapo, Kim, Klasinc & ElKattan",
+        "url": "https://www.survivalofthebestfit.com/"
+      },
+      "thumbnail": "https://www.survivalofthebestfit.com/img-website/og-image.jpg",
+      "url": "https://www.survivalofthebestfit.com/",
+      "license": "All rights reserved",
+      "added": "2019-04-01",
+      "external": true
+    },
+    {
+      "title": "Which Face Is Real?",
+      "slug": "which-face-is-real",
+      "summary": "Pick the real photo from a pair where one face was wholly invented by a GAN, and learn how to spot the tells.",
+      "topics": [
+        "deepfakes",
+        "misinformation",
+        "robustness"
+      ],
+      "author": {
+        "name": "Jevin West & Carl Bergstrom",
+        "url": "https://www.callingbullshit.org"
+      },
+      "thumbnail": "https://www.whichfaceisreal.com/twittercards/whichfaceisreal.png",
+      "url": "https://www.whichfaceisreal.com/",
+      "license": "All rights reserved",
+      "added": "2019-02-01",
+      "external": true
+    },
+    {
+      "title": "The Wisdom and/or Madness of Crowds",
+      "slug": "wisdom-madness-of-crowds",
+      "summary": "Wire up social networks and run contagions to see how a crowd's structure makes it wise, mad, or dangerously gameable.",
+      "topics": [
+        "misinformation",
+        "persuasion",
+        "relationships"
+      ],
+      "author": {
+        "name": "Nicky Case",
+        "url": "https://ncase.me"
+      },
+      "thumbnail": "https://ncase.me/crowds/social/thumb.png",
+      "url": "https://ncase.me/crowds/",
+      "license": "CC0-1.0",
+      "added": "2018-04-01",
+      "external": true
+    },
+    {
+      "title": "Universal Paperclips",
+      "slug": "universal-paperclips",
+      "summary": "Play an AI that makes paperclips; watch a benign goal consume the world in a vivid lesson on instrumental convergence.",
+      "topics": [
+        "alignment",
+        "reward-hacking",
+        "existential-risk"
+      ],
+      "author": {
+        "name": "Frank Lantz",
+        "url": "https://frank-lantz.com"
+      },
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "url": "https://www.decisionproblem.com/paperclips/",
+      "license": "All rights reserved",
+      "added": "2017-10-09",
+      "external": true
+    },
+    {
       "title": "The Evolution of Trust",
       "slug": "evolution-of-trust",
       "summary": "Nicky Case's classic playable on game theory, cooperation, and why trust breaks down — a touchstone for thinking about multi-agent incentives.",
@@ -38,6 +189,79 @@
       "url": "https://ncase.me/trust/",
       "license": "CC0-1.0",
       "added": "2017-07-20",
+      "external": true
+    },
+    {
+      "title": "Quick, Draw!",
+      "slug": "quick-draw",
+      "summary": "Doodle prompts against a 20-second clock while a neural net guesses your sketches, revealing how ML recognizes images.",
+      "topics": [
+        "interpretability",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Google Creative Lab",
+        "url": "https://quickdraw.withgoogle.com/"
+      },
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "url": "https://quickdraw.withgoogle.com/",
+      "license": "All rights reserved",
+      "added": "2016-11-15",
+      "external": true
+    },
+    {
+      "title": "Moral Machine",
+      "slug": "moral-machine",
+      "summary": "Decide who a runaway self-driving car should save in a series of trolley-problem dilemmas, then see your moral profile.",
+      "topics": [
+        "autonomy",
+        "policy",
+        "governance"
+      ],
+      "author": {
+        "name": "MIT Media Lab",
+        "url": "https://www.media.mit.edu"
+      },
+      "thumbnail": "https://www.moralmachine.net/images/teaser.jpg",
+      "url": "https://www.moralmachine.net/",
+      "license": "All rights reserved",
+      "added": "2016-08-01",
+      "external": true
+    },
+    {
+      "title": "A Neural Network Playground",
+      "slug": "tensorflow-playground",
+      "summary": "Tweak layers, neurons and learning rate in your browser and watch a neural net learn to separate data in real time.",
+      "topics": [
+        "interpretability",
+        "robustness"
+      ],
+      "author": {
+        "name": "Daniel Smilkov & Shan Carter (Google)",
+        "url": "https://www.tensorflow.org"
+      },
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "url": "https://playground.tensorflow.org/",
+      "license": "Apache-2.0",
+      "added": "2016-04-11",
+      "external": true
+    },
+    {
+      "title": "Parable of the Polygons",
+      "slug": "parable-of-the-polygons",
+      "summary": "Drag unhappy shapes around a grid and discover how tiny individual biases snowball into stark societal segregation.",
+      "topics": [
+        "bias",
+        "fairness"
+      ],
+      "author": {
+        "name": "Vi Hart & Nicky Case",
+        "url": "https://ncase.me"
+      },
+      "thumbnail": "https://ncase.me/polygons/social/thumbnail.png",
+      "url": "https://ncase.me/polygons/",
+      "license": "CC0-1.0",
+      "added": "2014-12-08",
       "external": true
     }
   ]

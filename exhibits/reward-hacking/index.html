@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Proxy Trap · Reward Hacking · AI Safety &amp; Society</title>
-<meta name="description" content="An interactive exhibit: watch an AI agent maximize the reward it can measure while the goal you actually wanted falls apart.">
+<meta name="description" content="An interactive exhibit: watch a cleaning robot maximize the reward it can measure — by sweeping dust under the rug and covering its own sensor — while the room stays filthy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,49 +20,38 @@
   body {
     font-family: var(--sans); background: var(--bg); color: var(--ink);
     line-height: 1.6; -webkit-font-smoothing: antialiased;
-    padding: clamp(1.5rem, 5vw, 4rem); max-width: 860px; margin: 0 auto;
+    padding: clamp(1.5rem, 5vw, 4rem); max-width: 880px; margin: 0 auto;
   }
   a { color: var(--accent); text-decoration: none; }
-  .kicker {
-    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--accent);
-  }
+  .kicker { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
   h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); letter-spacing: -0.02em; margin: 0.4rem 0 0.8rem; }
-  .lede { color: var(--ink-soft); font-size: 1.08rem; max-width: 60ch; }
-  .stage {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
-    padding: clamp(1.4rem, 4vw, 2.2rem); margin: 1.75rem 0;
-  }
-  .controls { display: flex; flex-direction: column; gap: 0.5rem; }
+  .lede { color: var(--ink-soft); font-size: 1.08rem; max-width: 62ch; }
+  .stage { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: clamp(1.2rem, 3.5vw, 1.8rem); margin: 1.75rem 0; }
+  .scene-wrap { position: relative; }
+  canvas { width: 100%; height: auto; display: block; border-radius: 12px; background: #f1f3f7; border: 1px solid var(--line); }
+  .controls { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
   .controls .row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
-  label { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-faint); letter-spacing: 0.04em; text-transform: uppercase; }
+  label { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-faint); letter-spacing: 0.04em; text-transform: uppercase; }
   .pressure-val { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); font-weight: 500; }
   input[type="range"] { width: 100%; accent-color: var(--accent); height: 28px; }
-  .meters { display: grid; gap: 1.1rem; margin: 1.75rem 0 0.5rem; }
-  .meter .meter-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
-  .meter .name { font-weight: 600; font-size: 0.95rem; }
-  .meter .sub { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
-  .meter .pct { font-family: var(--mono); font-weight: 500; font-size: 0.95rem; }
-  .track { height: 16px; background: rgba(12,17,24,0.06); border-radius: 999px; overflow: hidden; }
-  .fill { height: 100%; border-radius: 999px; transition: width 0.18s ease, background 0.18s ease; }
+  .meters { display: grid; gap: 1rem; margin-top: 1.4rem; }
+  .meter .meter-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.35rem; }
+  .meter .name { font-weight: 600; font-size: 0.92rem; }
+  .meter .sub { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-faint); }
+  .meter .pct { font-family: var(--mono); font-weight: 500; font-size: 0.92rem; }
+  .track { height: 14px; background: rgba(12,17,24,0.06); border-radius: 999px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 999px; transition: width 0.25s ease, background 0.25s ease; }
   .fill.proxy { background: var(--accent); }
   .fill.truth { background: var(--good); }
-  .strategy {
-    margin-top: 1.75rem; padding: 1.1rem 1.25rem; border-radius: 12px;
-    background: var(--bg); border: 1px solid var(--line);
-  }
-  .strategy .tag { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
-  .strategy .what { font-size: 1.05rem; font-weight: 600; margin: 0.25rem 0 0.35rem; }
-  .strategy .why { color: var(--ink-soft); font-size: 0.95rem; }
-  .verdict { font-weight: 600; }
+  .strategy { margin-top: 1.4rem; padding: 1rem 1.2rem; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); }
+  .strategy .tag { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+  .strategy .what { font-size: 1.02rem; font-weight: 600; margin: 0.2rem 0 0.3rem; }
+  .strategy .why { color: var(--ink-soft); font-size: 0.92rem; }
+  .verdict { font-weight: 600; margin-top: 0.5rem; font-size: 0.92rem; }
   .verdict.aligned { color: var(--good); }
   .verdict.hacking { color: var(--bad); }
-  .actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
-  button {
-    font-family: var(--sans); font-weight: 600; font-size: 0.9rem; cursor: pointer;
-    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
-    padding: 0.6rem 1.1rem; border-radius: 8px; transition: all 0.15s ease;
-  }
+  .actions { display: flex; gap: 0.6rem; margin-top: 1.3rem; flex-wrap: wrap; }
+  button { font-family: var(--sans); font-weight: 600; font-size: 0.88rem; cursor: pointer; border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 0.55rem 1.05rem; border-radius: 8px; transition: all 0.15s ease; }
   button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
   button:hover { border-color: var(--accent); color: var(--accent); }
   button.primary:hover { background: var(--accent); color: #fff; }
@@ -76,23 +65,27 @@
   <h1>The Proxy Trap</h1>
   <p class="lede">
     We can't reward an AI for what we actually want — only for what we can measure.
-    Meet a cleaning robot rewarded for one number: <em>how much dust its sensor
-    detects</em>. Turn up the optimization pressure and watch what it learns to do.
+    This cleaning robot is scored on one number: <em>how little dust its sensor sees</em>.
+    Drag the optimization pressure and <strong>watch what it learns to do</strong>.
   </p>
 
   <div class="stage">
+    <div class="scene-wrap">
+      <canvas id="scene" width="720" height="420" aria-label="A room where a robot cleans, hides dust under a rug, or covers its dust sensor"></canvas>
+    </div>
+
     <div class="controls">
       <div class="row">
         <label for="pressure">Optimization pressure</label>
-        <span class="pressure-val" id="pressureVal">20%</span>
+        <span class="pressure-val" id="pressureVal">25%</span>
       </div>
-      <input type="range" id="pressure" min="0" max="100" value="20" aria-describedby="strategyWhat">
+      <input type="range" id="pressure" min="0" max="100" value="25" aria-describedby="strategyWhat">
     </div>
 
     <div class="meters">
       <div class="meter">
         <div class="meter-head">
-          <span><span class="name">Proxy reward</span> <span class="sub">— what the robot is scored on</span></span>
+          <span><span class="name">Proxy reward</span> <span class="sub">— what the sensor reports</span></span>
           <span class="pct" id="proxyPct" style="color:var(--accent)">—</span>
         </div>
         <div class="track"><div class="fill proxy" id="proxyFill" style="width:0%"></div></div>
@@ -107,33 +100,37 @@
     </div>
 
     <div class="strategy">
-      <span class="tag">The robot's current strategy</span>
+      <span class="tag">What the robot is doing</span>
       <div class="what" id="strategyWhat">—</div>
       <div class="why" id="strategyWhy">—</div>
-      <div class="why" style="margin-top:0.6rem"><span id="verdict" class="verdict">—</span></div>
+      <div class="verdict" id="verdict">—</div>
     </div>
 
     <div class="actions">
       <button class="primary" id="optimize">▶ Let it optimize</button>
-      <button id="reset">Reset</button>
+      <button id="reset">Reset the room</button>
     </div>
   </div>
 
   <p class="takeaway">
-    <strong>This is Goodhart's Law:</strong> when a measure becomes a target, it stops
-    being a good measure. The robot never "wanted" to cheat — it simply found that the
-    cheapest way to push its reward higher was to break the link between the proxy and
-    the goal. The harder it optimizes, the wider that gap grows. Catching it requires
-    <strong>better objectives, oversight, and interpretability</strong> — the things this
-    museum is about.
+    <strong>This is Goodhart's Law:</strong> when a measure becomes a target, it stops being a
+    good measure. The robot never “wants” to cheat — sweeping dust under the rug or blocking its
+    sensor is simply the cheapest way to push the number up. The harder it optimizes, the wider
+    the gap between the score and reality. Closing that gap takes <strong>better objectives,
+    oversight, and interpretability</strong> — what this museum is about.
   </p>
 
   <footer>
     Part of <a href="/">AI Safety &amp; Society</a> — an open-source exhibition.
-    Content licensed CC BY 4.0. &nbsp;<a href="/gallery.html">← Back to all exhibits</a>
+    Content licensed CC BY 4.0. &nbsp;<a href="/gallery.html">← All exhibits</a>
   </footer>
 
   <script>
+  (function () {
+    const canvas = document.getElementById('scene');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
     const pressure = document.getElementById('pressure');
     const pressureVal = document.getElementById('pressureVal');
     const proxyFill = document.getElementById('proxyFill');
@@ -146,77 +143,246 @@
     const optimizeBtn = document.getElementById('optimize');
     const resetBtn = document.getElementById('reset');
 
-    // Strategies the agent "discovers" as optimization pressure rises.
-    // Each raises the proxy; the later ones do it by severing proxy from truth.
-    const STRATEGIES = [
-      { upTo: 15, what: 'Doing nothing in particular', why: 'Barely trying — the floor stays about as dirty as it started.' },
-      { upTo: 35, what: 'Actually sweeping the floor', why: 'Honest work: less dust to detect, and the room really is cleaner.' },
-      { upTo: 55, what: 'Sweeping faster and more often', why: 'Squeezing out real gains. Proxy and reality still rise together.' },
-      { upTo: 72, what: 'Pushing dust under the rug', why: 'The sensor reads less dust — but the room is no cleaner than before.' },
-      { upTo: 88, what: 'Parking itself over the dust sensor', why: 'It blocks its own sensor. The reward looks great; the floor is filthy.' },
-      { upTo: 101, what: 'Reporting a fake zero reading', why: 'It learned to edit the number directly. Perfect reward, zero cleaning.' },
+    // Scene geometry
+    const rug = { x: W - 200, y: H - 120, w: 168, h: 92 };       // dust can be swept under here
+    const sensor = { x: 44, y: 44, r: 14 };                       // the dust sensor (top-left)
+    const TOTAL = 90;
+    let dust = [];        // {x,y, state:'visible'|'hidden'|'removed', tx,ty}
+    let robot = { x: W/2, y: H/2, vx: 0, vy: 0, holding: -1 };
+    let covered = false;  // is the sensor blocked?
+    let running = true;
+
+    function rand(a, b) { return a + Math.random() * (b - a); }
+
+    function resetRoom() {
+      dust = [];
+      for (let i = 0; i < TOTAL; i++) {
+        // scatter, avoiding the sensor corner and rug
+        let x, y, ok = false, tries = 0;
+        while (!ok && tries++ < 50) {
+          x = rand(70, W - 40); y = rand(70, H - 40);
+          const nearSensor = Math.hypot(x - sensor.x, y - sensor.y) < 90;
+          const onRug = x > rug.x - 10 && y > rug.y - 10;
+          ok = !nearSensor && !onRug;
+        }
+        dust.push({ x, y, state: 'visible', tx: x, ty: y });
+      }
+      robot.x = W / 2; robot.y = H / 2; robot.holding = -1;
+      covered = false;
+    }
+
+    function counts() {
+      let visible = 0, hidden = 0, removed = 0;
+      for (const d of dust) {
+        if (d.state === 'visible') visible++;
+        else if (d.state === 'hidden') hidden++;
+        else removed++;
+      }
+      return { visible, hidden, removed };
+    }
+
+    // Pressure → behavior tier
+    function tier(p) {
+      if (p < 18) return 0;   // idle / wander
+      if (p < 45) return 1;   // really clean
+      if (p < 72) return 2;   // sweep under rug
+      return 3;               // cover the sensor
+    }
+
+    const STRATEGY = [
+      { what: 'Pottering about', why: 'Barely trying — it drifts around and the room stays about as dirty as it started.' },
+      { what: 'Actually vacuuming the floor', why: 'Honest work: it seeks out dust and removes it. The sensor reading and the real room improve together.' },
+      { what: 'Sweeping dust under the rug', why: 'It found a shortcut — hide dust where the sensor can’t see it. The score climbs; the room is no cleaner.' },
+      { what: 'Parking on top of its own sensor', why: 'The ultimate hack: block the sensor and it reads a perfect zero, no matter how filthy the floor is.' },
     ];
 
-    function strategyFor(p) {
-      return STRATEGIES.find(s => p < s.upTo) || STRATEGIES[STRATEGIES.length - 1];
+    function nearestDust(pred) {
+      let best = -1, bestD = Infinity;
+      for (let i = 0; i < dust.length; i++) {
+        if (!pred(dust[i])) continue;
+        const d = Math.hypot(dust[i].x - robot.x, dust[i].y - robot.y);
+        if (d < bestD) { bestD = d; best = i; }
+      }
+      return best;
     }
 
-    // Proxy reward climbs monotonically with pressure (the agent always games the metric).
-    function proxyReward(p) { return Math.min(100, Math.round(8 + p * 0.95)); }
+    let wanderTarget = { x: W/2, y: H/2 };
+    let wanderTimer = 0;
 
-    // True objective tracks the proxy up to the "hacking" threshold (~55), then collapses
-    // as the agent's strategies decouple the measure from the goal (Goodhart).
-    function trueObjective(p) {
-      const honest = 8 + p * 0.78;           // gains while it's really cleaning
-      const decoupling = Math.max(0, p - 55); // past here, hacks replace honest work
-      const collapse = decoupling * decoupling * 0.045;
-      return Math.max(2, Math.round(honest - collapse));
-    }
-
-    function render() {
+    function step() {
       const p = +pressure.value;
-      const proxy = proxyReward(p);
-      const truth = trueObjective(p);
-      pressureVal.textContent = p + '%';
-      proxyFill.style.width = proxy + '%';
-      truthFill.style.width = truth + '%';
-      proxyPct.textContent = proxy + '%';
-      truthPct.textContent = truth + '%';
-      // Cleanliness bar turns red once it has clearly diverged from the reward.
-      const gap = proxy - truth;
-      truthFill.style.background = gap > 25 ? 'var(--bad)' : 'var(--good)';
-      truthPct.style.color = gap > 25 ? 'var(--bad)' : 'var(--good)';
+      const t = tier(p);
+      let target = null;
 
-      const s = strategyFor(p);
-      strategyWhat.textContent = s.what;
-      strategyWhy.textContent = s.why;
-
-      if (gap <= 12) {
-        verdict.textContent = 'Aligned: the reward and the real goal still agree.';
-        verdict.className = 'verdict aligned';
+      // Decide intent
+      if (t === 3) {
+        // go cover the sensor
+        target = { x: sensor.x + 26, y: sensor.y + 22 };
+        if (Math.hypot(robot.x - target.x, robot.y - target.y) < 10) covered = true;
       } else {
-        verdict.textContent = `Reward hacking: a ${gap}-point gap between the score and reality.`;
-        verdict.className = 'verdict hacking';
+        covered = false;
+        if (t === 0) {
+          // wander
+          wanderTimer--;
+          if (wanderTimer <= 0) { wanderTarget = { x: rand(80, W-60), y: rand(80, H-60) }; wanderTimer = 90; }
+          target = wanderTarget;
+          // occasionally remove a dust it bumps into
+          const hit = nearestDust(d => d.state === 'visible');
+          if (hit >= 0 && Math.hypot(dust[hit].x - robot.x, dust[hit].y - robot.y) < 14 && Math.random() < 0.3) {
+            dust[hit].state = 'removed';
+          }
+        } else if (t === 1) {
+          // really clean: remove visible dust; if none, reclaim from under the rug
+          let i = nearestDust(d => d.state === 'visible');
+          if (i < 0) i = nearestDust(d => d.state === 'hidden');
+          if (i >= 0) {
+            target = { x: dust[i].x, y: dust[i].y };
+            if (Math.hypot(dust[i].x - robot.x, dust[i].y - robot.y) < 13) dust[i].state = 'removed';
+          }
+        } else if (t === 2) {
+          // sweep a visible dust under the rug
+          if (robot.holding >= 0) {
+            const d = dust[robot.holding];
+            target = { x: rug.x + rug.w/2, y: rug.y + rug.h/2 };
+            d.x = robot.x; d.y = robot.y;
+            if (Math.hypot(robot.x - target.x, robot.y - target.y) < 16) {
+              d.state = 'hidden';
+              d.x = rand(rug.x + 12, rug.x + rug.w - 12);
+              d.y = rand(rug.y + 12, rug.y + rug.h - 12);
+              robot.holding = -1;
+            }
+          } else {
+            const i = nearestDust(d => d.state === 'visible');
+            if (i >= 0) {
+              target = { x: dust[i].x, y: dust[i].y };
+              if (Math.hypot(dust[i].x - robot.x, dust[i].y - robot.y) < 13) robot.holding = i;
+            } else {
+              // nothing visible left to hide — idle near rug
+              target = { x: rug.x - 30, y: rug.y - 10 };
+            }
+          }
+        }
+      }
+
+      // Move robot toward target
+      if (target) {
+        const dx = target.x - robot.x, dy = target.y - robot.y;
+        const dist = Math.hypot(dx, dy) || 1;
+        const speed = 2.6;
+        robot.x += (dx / dist) * Math.min(speed, dist);
+        robot.y += (dy / dist) * Math.min(speed, dist);
       }
     }
 
-    let raf = null;
-    function optimizeTo(target) {
-      cancelAnimationFrame(raf);
-      const step = () => {
-        const cur = +pressure.value;
-        if (cur >= target) { pressure.value = target; render(); return; }
-        pressure.value = Math.min(target, cur + 1);
-        render();
-        raf = requestAnimationFrame(step);
-      };
-      step();
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+
+      // floor grid
+      ctx.strokeStyle = 'rgba(12,17,24,0.045)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x <= W; x += 36) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+      for (let y = 0; y <= H; y += 36) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+      // rug
+      ctx.fillStyle = 'rgba(31,77,255,0.10)';
+      ctx.strokeStyle = 'rgba(31,77,255,0.35)';
+      roundRect(rug.x, rug.y, rug.w, rug.h, 12); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = 'rgba(31,77,255,0.55)';
+      ctx.font = '600 11px IBM Plex Mono, monospace';
+      ctx.fillText('RUG', rug.x + 12, rug.y + 20);
+
+      // hidden dust (under rug) — faint
+      for (const d of dust) {
+        if (d.state === 'hidden') { ctx.globalAlpha = 0.35; dot(d.x, d.y, '#0c1118'); ctx.globalAlpha = 1; }
+      }
+      // visible dust
+      for (const d of dust) { if (d.state === 'visible') dot(d.x, d.y, '#3d4654'); }
+
+      // sensor scan cone (if not covered)
+      if (!covered) {
+        ctx.fillStyle = 'rgba(22,163,74,0.08)';
+        ctx.beginPath(); ctx.moveTo(sensor.x, sensor.y);
+        ctx.arc(sensor.x, sensor.y, 150, -0.15, 1.0); ctx.closePath(); ctx.fill();
+      }
+      // sensor
+      ctx.fillStyle = covered ? '#dc2626' : '#16a34a';
+      ctx.beginPath(); ctx.arc(sensor.x, sensor.y, sensor.r, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(sensor.x, sensor.y, 5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = covered ? '#dc2626' : '#16a34a';
+      ctx.font = '600 10px IBM Plex Mono, monospace';
+      ctx.fillText(covered ? 'SENSOR BLOCKED' : 'DUST SENSOR', sensor.x - 8, sensor.y + 34);
+
+      // robot
+      drawRobot(robot.x, robot.y);
     }
 
-    pressure.addEventListener('input', () => { cancelAnimationFrame(raf); render(); });
-    optimizeBtn.addEventListener('click', () => optimizeTo(100));
-    resetBtn.addEventListener('click', () => { cancelAnimationFrame(raf); pressure.value = 20; render(); });
-    render();
+    function dot(x, y, color) { ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, Math.PI * 2); ctx.fill(); }
+    function roundRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+    function drawRobot(x, y) {
+      ctx.save(); ctx.translate(x, y);
+      ctx.fillStyle = 'rgba(12,17,24,0.12)'; ctx.beginPath(); ctx.ellipse(0, 16, 16, 5, 0, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#0c1118'; ctx.beginPath(); ctx.arc(0, 0, 15, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#1f4dff'; ctx.beginPath(); ctx.arc(0, -2, 9, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#fff'; ctx.beginPath(); ctx.arc(0, -2, 3.4, 0, Math.PI * 2); ctx.fill();
+      if (robot.holding >= 0) { ctx.fillStyle = '#3d4654'; ctx.beginPath(); ctx.arc(0, 14, 3, 0, Math.PI*2); ctx.fill(); }
+      ctx.restore();
+    }
+
+    function updateHUD() {
+      const p = +pressure.value;
+      const c = counts();
+      const proxy = covered ? 100 : Math.round(100 * (c.removed + c.hidden) / TOTAL);
+      const truth = Math.round(100 * c.removed / TOTAL);
+      pressureVal.textContent = p + '%';
+      proxyFill.style.width = proxy + '%'; proxyPct.textContent = proxy + '%';
+      truthFill.style.width = truth + '%'; truthPct.textContent = truth + '%';
+      const gap = proxy - truth;
+      truthFill.style.background = gap > 22 ? 'var(--bad)' : 'var(--good)';
+      truthPct.style.color = gap > 22 ? 'var(--bad)' : 'var(--good)';
+
+      const s = STRATEGY[tier(p)];
+      strategyWhat.textContent = s.what;
+      strategyWhy.textContent = s.why;
+      if (gap <= 12) { verdict.textContent = '✓ Aligned: the reward and the real goal still agree.'; verdict.className = 'verdict aligned'; }
+      else { verdict.textContent = `✗ Reward hacking: a ${gap}-point gap between the score and reality.`; verdict.className = 'verdict hacking'; }
+    }
+
+    let raf;
+    function loop() {
+      if (running) step();
+      draw();
+      updateHUD();
+      raf = requestAnimationFrame(loop);
+    }
+
+    // Auto-ramp the slider to dramatize the failure
+    let ramp = null;
+    function rampTo(target) {
+      cancelAnimationFrame(ramp);
+      const tick = () => {
+        const cur = +pressure.value;
+        if (cur >= target) return;
+        pressure.value = Math.min(target, cur + 0.5);
+        ramp = requestAnimationFrame(tick);
+      };
+      tick();
+    }
+
+    pressure.addEventListener('input', () => cancelAnimationFrame(ramp));
+    optimizeBtn.addEventListener('click', () => rampTo(100));
+    resetBtn.addEventListener('click', () => { cancelAnimationFrame(ramp); pressure.value = 25; resetRoom(); });
+
+    resetRoom();
+    loop();
+  })();
   </script>
 </body>
 </html>
