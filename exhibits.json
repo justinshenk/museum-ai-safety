@@ -1,6 +1,6 @@
 {
   "generated": "run `node scripts/build-gallery.mjs` to regenerate",
-  "count": 14,
+  "count": 28,
   "exhibits": [
     {
       "title": "The Proxy Trap",
@@ -22,6 +22,24 @@
       "path": "exhibits/reward-hacking/index.html"
     },
     {
+      "title": "Transformer Explainer",
+      "slug": "transformer-explainer",
+      "summary": "Type your own text into a live GPT-2 and tweak temperature and sampling to watch attention and next-word prediction unfold layer by layer.",
+      "topics": [
+        "interpretability",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Polo Club of Data Science (Georgia Tech)",
+        "url": "https://poloclub.github.io"
+      },
+      "thumbnail": "https://poloclub.github.io/transformer-explainer/preview/summary.png",
+      "url": "https://poloclub.github.io/transformer-explainer/",
+      "license": "MIT",
+      "added": "2024-08-01",
+      "external": true
+    },
+    {
       "title": "Memorize or Generalize? (Grokking)",
       "slug": "grokking-memorize-or-generalize",
       "summary": "Step through a tiny network as it suddenly 'groks' a pattern, peeking inside its weights to see memorization become understanding.",
@@ -37,6 +55,81 @@
       "url": "https://pair.withgoogle.com/explorables/grokking/",
       "license": "Apache-2.0",
       "added": "2023-08-01",
+      "external": true
+    },
+    {
+      "title": "Diffusion Explainer",
+      "slug": "diffusion-explainer",
+      "summary": "Type a prompt and step through how Stable Diffusion gradually denoises random noise into an image, guided by your text.",
+      "topics": [
+        "interpretability",
+        "deepfakes"
+      ],
+      "author": {
+        "name": "Polo Club of Data Science (Georgia Tech)",
+        "url": "https://poloclub.github.io"
+      },
+      "url": "https://poloclub.github.io/diffusion-explainer/",
+      "license": "MIT",
+      "added": "2023-04-01",
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "external": true
+    },
+    {
+      "title": "Datasets Have Worldviews",
+      "slug": "datasets-have-worldviews",
+      "summary": "Relabel a dataset of shapes under different classification schemes to feel how every dataset bakes in a particular point of view.",
+      "topics": [
+        "bias",
+        "fairness",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Google PAIR",
+        "url": "https://pair.withgoogle.com"
+      },
+      "thumbnail": "https://pair.withgoogle.com/explorables/images/dataset-worldviews-shareimg.png",
+      "url": "https://pair.withgoogle.com/explorables/dataset-worldviews/",
+      "license": "Apache-2.0",
+      "added": "2022-03-01",
+      "external": true
+    },
+    {
+      "title": "Can a Model Be Private and Fair?",
+      "slug": "private-and-fair",
+      "summary": "Slide the privacy dial on a digit classifier and watch the tradeoff between protecting training data and treating rare examples fairly.",
+      "topics": [
+        "fairness",
+        "bias",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Google PAIR",
+        "url": "https://pair.withgoogle.com"
+      },
+      "thumbnail": "https://pair.withgoogle.com/explorables/images/private-and-fair.png",
+      "url": "https://pair.withgoogle.com/explorables/private-and-fair/",
+      "license": "Apache-2.0",
+      "added": "2022-02-01",
+      "external": true
+    },
+    {
+      "title": "What Have Language Models Learned?",
+      "slug": "what-have-language-models-learned",
+      "summary": "Fill in the blank of any sentence and watch BERT's predictions shift, surfacing the gender, geographic and cultural biases it absorbed.",
+      "topics": [
+        "bias",
+        "interpretability",
+        "fairness"
+      ],
+      "author": {
+        "name": "Google PAIR",
+        "url": "https://pair.withgoogle.com"
+      },
+      "thumbnail": "https://pair.withgoogle.com/explorables/images/fill-in-the-blank.png",
+      "url": "https://pair.withgoogle.com/explorables/fill-in-the-blank/",
+      "license": "Apache-2.0",
+      "added": "2021-07-28",
       "external": true
     },
     {
@@ -59,6 +152,44 @@
       "external": true
     },
     {
+      "title": "Harmony Square",
+      "slug": "harmony-square",
+      "summary": "Become a chief disinformation officer sowing chaos in a peaceful town, exposing how political manipulation campaigns are built.",
+      "topics": [
+        "misinformation",
+        "persuasion",
+        "governance"
+      ],
+      "author": {
+        "name": "DROG / University of Cambridge",
+        "url": "https://www.cam.ac.uk"
+      },
+      "thumbnail": "https://www.harmonysquare.game/wp-content/uploads/2024/04/HSQ-Eng-Tweet-real-1.png",
+      "url": "https://harmonysquare.game/en",
+      "license": "All rights reserved",
+      "added": "2020-11-05",
+      "external": true
+    },
+    {
+      "title": "Hidden Bias",
+      "slug": "hidden-bias-explorable",
+      "summary": "Adjust a model that predicts student grades and discover how a proxy feature can secretly encode bias the model was never told about.",
+      "topics": [
+        "bias",
+        "fairness",
+        "interpretability"
+      ],
+      "author": {
+        "name": "Google PAIR",
+        "url": "https://pair.withgoogle.com"
+      },
+      "thumbnail": "https://pair.withgoogle.com/explorables/images/hidden-bias.png",
+      "url": "https://pair.withgoogle.com/explorables/hidden-bias/",
+      "license": "Apache-2.0",
+      "added": "2020-09-01",
+      "external": true
+    },
+    {
       "title": "Measuring Fairness",
       "slug": "measuring-fairness",
       "summary": "Slide a model's decision threshold and watch fairness metrics collide, showing why you can't satisfy every notion at once.",
@@ -75,6 +206,62 @@
       "url": "https://pair.withgoogle.com/explorables/measuring-fairness/",
       "license": "Apache-2.0",
       "added": "2020-05-01",
+      "external": true
+    },
+    {
+      "title": "CNN Explainer",
+      "slug": "cnn-explainer",
+      "summary": "Click through every layer of a live image classifier to watch how a convolutional neural network turns pixels into a prediction.",
+      "topics": [
+        "interpretability",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Polo Club of Data Science (Georgia Tech)",
+        "url": "https://poloclub.github.io"
+      },
+      "thumbnail": "https://poloclub.github.io/cnn-explainer/assets/figures/preview.png",
+      "url": "https://poloclub.github.io/cnn-explainer/",
+      "license": "MIT",
+      "added": "2020-04-01",
+      "external": true
+    },
+    {
+      "title": "Cranky Uncle",
+      "slug": "cranky-uncle",
+      "summary": "Get mentored by a cartoon science-denier through quizzes that teach you to recognize the rhetorical tricks used to spread denial.",
+      "topics": [
+        "misinformation",
+        "persuasion",
+        "robustness"
+      ],
+      "author": {
+        "name": "John Cook / Cranky Uncle",
+        "url": "https://crankyuncle.com"
+      },
+      "url": "https://app.crankyuncle.info/",
+      "license": "All rights reserved",
+      "added": "2020-02-25",
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "external": true
+    },
+    {
+      "title": "Spot the Troll",
+      "slug": "spot-the-troll",
+      "summary": "Inspect real social-media profiles and guess which are genuine and which are state-sponsored troll accounts, then see how you scored.",
+      "topics": [
+        "misinformation",
+        "deception",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Clemson University Media Forensics Hub",
+        "url": "https://www.clemson.edu/centers-institutes/watt/hub/"
+      },
+      "thumbnail": "https://spotthetroll.org/images/metatags/index.jpg",
+      "url": "https://spotthetroll.org/",
+      "license": "All rights reserved",
+      "added": "2020-01-01",
       "external": true
     },
     {
@@ -135,6 +322,24 @@
       "external": true
     },
     {
+      "title": "GAN Lab",
+      "slug": "gan-lab",
+      "summary": "Draw your own data distribution and watch a generative adversarial network train in real time as generator and discriminator compete.",
+      "topics": [
+        "interpretability",
+        "deepfakes"
+      ],
+      "author": {
+        "name": "Polo Club of Data Science (Georgia Tech)",
+        "url": "https://poloclub.github.io"
+      },
+      "url": "https://poloclub.github.io/ganlab/",
+      "license": "Apache-2.0",
+      "added": "2018-09-01",
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "external": true
+    },
+    {
       "title": "The Wisdom and/or Madness of Crowds",
       "slug": "wisdom-madness-of-crowds",
       "summary": "Wire up social networks and run contagions to see how a crowd's structure makes it wise, mad, or dangerously gameable.",
@@ -151,6 +356,25 @@
       "url": "https://ncase.me/crowds/",
       "license": "CC0-1.0",
       "added": "2018-04-01",
+      "external": true
+    },
+    {
+      "title": "Bad News",
+      "slug": "bad-news",
+      "summary": "Step into the shoes of a fake-news mogul and learn manipulation tactics by spreading disinformation to inoculate yourself against it.",
+      "topics": [
+        "misinformation",
+        "persuasion",
+        "deception"
+      ],
+      "author": {
+        "name": "DROG / University of Cambridge",
+        "url": "https://www.cam.ac.uk"
+      },
+      "thumbnail": "https://www.getbadnews.com/wp-content/uploads/2022/07/cropped-badnews-favicon-270x270.png",
+      "url": "https://www.getbadnews.com/en/play",
+      "license": "All rights reserved",
+      "added": "2018-02-19",
       "external": true
     },
     {
@@ -189,6 +413,43 @@
       "url": "https://ncase.me/trust/",
       "license": "CC0-1.0",
       "added": "2017-07-20",
+      "external": true
+    },
+    {
+      "title": "Embedding Projector",
+      "slug": "embedding-projector",
+      "summary": "Fly through high-dimensional word and image embeddings in 3D, run t-SNE or PCA, and search for a point's nearest neighbors.",
+      "topics": [
+        "interpretability",
+        "evaluation"
+      ],
+      "author": {
+        "name": "Google TensorFlow",
+        "url": "https://www.tensorflow.org"
+      },
+      "url": "https://projector.tensorflow.org/",
+      "license": "Apache-2.0",
+      "added": "2016-12-07",
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+      "external": true
+    },
+    {
+      "title": "We Become What We Behold",
+      "slug": "we-become-what-we-behold",
+      "summary": "Aim a camera at squares and circles in a tiny news cycle and watch how amplifying outrage spirals an entire society into conflict.",
+      "topics": [
+        "misinformation",
+        "persuasion",
+        "relationships"
+      ],
+      "author": {
+        "name": "Nicky Case",
+        "url": "https://ncase.me"
+      },
+      "url": "https://ncase.itch.io/wbwwb",
+      "license": "CC0-1.0",
+      "added": "2016-12-01",
+      "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
       "external": true
     },
     {
