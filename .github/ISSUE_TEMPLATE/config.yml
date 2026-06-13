@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🙋 Become a founding volunteer
+    url: https://docs.google.com/forms/d/e/1FAIpQLSckGPa53Gh9MHLsXTkYyg_25DlB224IwXPU-QxoMdaZR34zOw/viewform
+    about: Want to help build the exhibition (not just file an issue)? Sign up here.
+  - name: 📖 How to contribute an exhibit
+    url: https://github.com/justinshenk/museum-ai-safety/blob/main/CONTRIBUTING.md
+    about: Step-by-step guide to adding an interactive exhibit.

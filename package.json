@@ -1,0 +1,14 @@
+{
+  "name": "museum-ai-safety",
+  "version": "0.1.0",
+  "description": "Open-source interactive exhibits for an AI safety museum exhibition (Berlin)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-gallery.mjs",
+    "validate": "node scripts/build-gallery.mjs --check",
+    "serve": "node --version >/dev/null && python3 -m http.server 8000"
+  },
+  "license": "MIT",
+  "homepage": "https://museum-ai-safety.vercel.app"
+}

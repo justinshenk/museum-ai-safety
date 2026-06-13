@@ -1,0 +1,19 @@
+name: Validate exhibits
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # Validates every exhibit manifest and fails if exhibits.json is stale.
+      # No dependencies to install — the build script uses Node built-ins only.
+      - name: Validate manifests and gallery index
+        run: node scripts/build-gallery.mjs --check

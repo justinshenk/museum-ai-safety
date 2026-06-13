@@ -1,0 +1,44 @@
+{
+  "generated": "run `node scripts/build-gallery.mjs` to regenerate",
+  "count": 2,
+  "exhibits": [
+    {
+      "title": "The Proxy Trap",
+      "slug": "reward-hacking",
+      "summary": "Crank up the optimization pressure and watch a cleaning robot maximize the reward it can measure while the goal you actually wanted falls apart.",
+      "topics": [
+        "reward-hacking",
+        "alignment"
+      ],
+      "author": {
+        "name": "AI Safety & Society",
+        "url": "https://museum-ai-safety.vercel.app"
+      },
+      "thumbnail": "exhibits/reward-hacking/thumbnail.svg",
+      "entry": "index.html",
+      "license": "CC-BY-4.0",
+      "added": "2026-06-13",
+      "external": false,
+      "path": "exhibits/reward-hacking/index.html"
+    },
+    {
+      "title": "The Evolution of Trust",
+      "slug": "evolution-of-trust",
+      "summary": "Nicky Case's classic playable on game theory, cooperation, and why trust breaks down — a touchstone for thinking about multi-agent incentives.",
+      "topics": [
+        "governance",
+        "relationships",
+        "other"
+      ],
+      "author": {
+        "name": "Nicky Case",
+        "url": "https://ncase.me"
+      },
+      "thumbnail": "https://ncase.me/trust/social.png",
+      "url": "https://ncase.me/trust/",
+      "license": "CC0-1.0",
+      "added": "2017-07-20",
+      "external": true
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+name: "🖐 Propose an exhibit"
+description: Pitch an interactive exhibit idea before building it.
+title: "[Exhibit] <short title>"
+labels: ["exhibit", "proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping grow the collection! Use this to float an idea and get feedback before
+        you build. Ready-made exhibits can also just go straight to a pull request — see
+        [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md).
+  - type: input
+    id: title
+    attributes:
+      label: Working title
+      placeholder: e.g. "The Proxy Trap"
+    validations:
+      required: true
+  - type: textarea
+    id: concept
+    attributes:
+      label: The one idea
+      description: What single concept does this exhibit make tangible, and what does the visitor *do*?
+      placeholder: A hands-on demo where the visitor… and discovers that…
+    validations:
+      required: true
+  - type: dropdown
+    id: topics
+    attributes:
+      label: Topic(s)
+      multiple: true
+      options:
+        - alignment
+        - interpretability
+        - deception
+        - persuasion
+        - deepfakes
+        - misinformation
+        - bias
+        - fairness
+        - autonomy
+        - oversight
+        - governance
+        - policy
+        - economy
+        - relationships
+        - reward-hacking
+        - catastrophic-risk
+        - existential-risk
+        - evaluation
+        - robustness
+        - other
+    validations:
+      required: true
+  - type: dropdown
+    id: hosting
+    attributes:
+      label: How would it be hosted?
+      options:
+        - In-repo (self-contained folder under exhibits/)
+        - Externally hosted (add to the registry)
+        - Not sure yet
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: Sketches, references, prior art, or questions for maintainers.
+    validations:
+      required: false

@@ -1,0 +1,14 @@
+{
+  "title": "Your Exhibit Title",
+  "slug": "your-exhibit-slug",
+  "summary": "One sentence shown on the gallery card — what the visitor will explore.",
+  "topics": ["alignment"],
+  "author": {
+    "name": "Your Name",
+    "url": "https://your-site-or-github.example"
+  },
+  "thumbnail": "thumbnail.svg",
+  "entry": "index.html",
+  "license": "CC-BY-4.0",
+  "added": "2026-01-01"
+}

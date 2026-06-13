@@ -1,0 +1,46 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+=========================================================
+
+The EXHIBITION CONTENT in this repository — the text, designs, illustrations,
+images, and the creative/educational substance of each exhibit — is licensed
+under the Creative Commons Attribution 4.0 International License, except where
+an individual exhibit's manifest (exhibit.json) or registry entry declares a
+different license.
+
+You are free to:
+
+  - Share — copy and redistribute the material in any medium or format
+  - Adapt — remix, transform, and build upon the material for any purpose,
+    even commercially
+
+Under the following terms:
+
+  - Attribution — You must give appropriate credit to "AI Safety & Society"
+    and the individual exhibit author(s), provide a link to this repository or
+    https://museum-ai-safety.vercel.app, and indicate if changes were made.
+    You may do so in any reasonable manner, but not in any way that suggests
+    the licensor endorses you or your use.
+
+  - No additional restrictions — You may not apply legal terms or technological
+    measures that legally restrict others from doing anything the license
+    permits.
+
+The full legal text of CC BY 4.0 is available at:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+A human-readable summary is at:
+https://creativecommons.org/licenses/by/4.0/
+
+---
+
+What is code vs. content?
+
+  - CODE (MIT, see LICENSE): build scripts, HTML/CSS/JS scaffolding for the
+    site and gallery, the exhibit template, and the program logic of each
+    interactive.
+  - CONTENT (CC BY 4.0, this file): the words, visuals, framing, datasets, and
+    educational design that make up each exhibit and the exhibition.
+
+When in doubt, the more permissive license applies to whatever you are reusing.
+Individual exhibits may set their own `license` field; that field governs that
+exhibit's content.

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" width="320" height="200" role="img" aria-label="Exhibit thumbnail placeholder">
+  <rect width="320" height="200" fill="#fafbfc"/>
+  <rect x="0.5" y="0.5" width="319" height="199" fill="none" stroke="#0c1118" stroke-opacity="0.12"/>
+  <circle cx="160" cy="92" r="26" fill="none" stroke="#1f4dff" stroke-width="2"/>
+  <circle cx="160" cy="92" r="9" fill="#1f4dff"/>
+  <text x="160" y="150" text-anchor="middle" font-family="'IBM Plex Mono', monospace" font-size="13" letter-spacing="2" fill="#7a8494">YOUR EXHIBIT</text>
+</svg>

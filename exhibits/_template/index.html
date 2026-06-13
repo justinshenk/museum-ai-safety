@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Exhibit Title · AI Safety &amp; Society</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Shared museum palette — keep these so every exhibit feels of-a-piece. */
+  :root {
+    --bg: #fafbfc; --surface: #ffffff; --ink: #0c1118; --ink-soft: #3d4654;
+    --ink-faint: #7a8494; --accent: #1f4dff; --line: rgba(12, 17, 24, 0.12);
+    --sans: 'Schibsted Grotesk', 'Helvetica Neue', sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans); background: var(--bg); color: var(--ink);
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+    padding: clamp(1.5rem, 5vw, 4rem); max-width: 820px; margin: 0 auto;
+  }
+  a { color: var(--accent); }
+  .kicker {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); letter-spacing: -0.02em; margin: 0.4rem 0 1rem; }
+  p { color: var(--ink-soft); margin-bottom: 1rem; }
+  .stage {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: clamp(1.25rem, 4vw, 2rem); margin: 1.5rem 0;
+  }
+  .controls { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
+  label { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-faint); }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  .readout {
+    font-family: var(--mono); font-size: 1.4rem; color: var(--ink);
+    padding: 1rem; background: var(--bg); border-radius: 10px; text-align: center;
+  }
+  footer { margin-top: 2.5rem; font-size: 0.85rem; color: var(--ink-faint); }
+  footer a { text-decoration: none; }
+</style>
+</head>
+<body>
+  <p class="kicker">AI Safety &amp; Society · Exhibit</p>
+  <h1>Your Exhibit Title</h1>
+  <p>
+    Replace this with a one-paragraph framing: what idea does the visitor explore,
+    and what should they try? Keep it concrete and hands-on.
+  </p>
+
+  <!-- ——— Replace everything inside .stage with your interactive ——— -->
+  <div class="stage">
+    <div class="controls">
+      <label for="knob">Try moving this — <span id="knobLabel">50</span></label>
+      <input type="range" id="knob" min="0" max="100" value="50">
+    </div>
+    <div class="readout" id="readout">Output updates as you interact.</div>
+  </div>
+
+  <footer>
+    Part of <a href="/">AI Safety &amp; Society</a> — an open-source exhibition.
+    Content licensed CC BY 4.0 unless noted.
+  </footer>
+
+  <script>
+    // Minimal example wiring. Delete and write your own.
+    const knob = document.getElementById('knob');
+    const knobLabel = document.getElementById('knobLabel');
+    const readout = document.getElementById('readout');
+    function update() {
+      knobLabel.textContent = knob.value;
+      readout.textContent = `You set the value to ${knob.value}.`;
+    }
+    knob.addEventListener('input', update);
+    update();
+  </script>
+</body>
+</html>

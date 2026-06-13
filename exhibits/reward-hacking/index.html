@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Proxy Trap · Reward Hacking · AI Safety &amp; Society</title>
+<meta name="description" content="An interactive exhibit: watch an AI agent maximize the reward it can measure while the goal you actually wanted falls apart.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafbfc; --surface: #ffffff; --ink: #0c1118; --ink-soft: #3d4654;
+    --ink-faint: #7a8494; --accent: #1f4dff; --good: #16a34a; --bad: #dc2626;
+    --line: rgba(12, 17, 24, 0.12);
+    --sans: 'Schibsted Grotesk', 'Helvetica Neue', sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans); background: var(--bg); color: var(--ink);
+    line-height: 1.6; -webkit-font-smoothing: antialiased;
+    padding: clamp(1.5rem, 5vw, 4rem); max-width: 860px; margin: 0 auto;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  .kicker {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); letter-spacing: -0.02em; margin: 0.4rem 0 0.8rem; }
+  .lede { color: var(--ink-soft); font-size: 1.08rem; max-width: 60ch; }
+  .stage {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: clamp(1.4rem, 4vw, 2.2rem); margin: 1.75rem 0;
+  }
+  .controls { display: flex; flex-direction: column; gap: 0.5rem; }
+  .controls .row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; }
+  label { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-faint); letter-spacing: 0.04em; text-transform: uppercase; }
+  .pressure-val { font-family: var(--mono); font-size: 0.9rem; color: var(--accent); font-weight: 500; }
+  input[type="range"] { width: 100%; accent-color: var(--accent); height: 28px; }
+  .meters { display: grid; gap: 1.1rem; margin: 1.75rem 0 0.5rem; }
+  .meter .meter-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.4rem; }
+  .meter .name { font-weight: 600; font-size: 0.95rem; }
+  .meter .sub { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-faint); }
+  .meter .pct { font-family: var(--mono); font-weight: 500; font-size: 0.95rem; }
+  .track { height: 16px; background: rgba(12,17,24,0.06); border-radius: 999px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 999px; transition: width 0.18s ease, background 0.18s ease; }
+  .fill.proxy { background: var(--accent); }
+  .fill.truth { background: var(--good); }
+  .strategy {
+    margin-top: 1.75rem; padding: 1.1rem 1.25rem; border-radius: 12px;
+    background: var(--bg); border: 1px solid var(--line);
+  }
+  .strategy .tag { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); }
+  .strategy .what { font-size: 1.05rem; font-weight: 600; margin: 0.25rem 0 0.35rem; }
+  .strategy .why { color: var(--ink-soft); font-size: 0.95rem; }
+  .verdict { font-weight: 600; }
+  .verdict.aligned { color: var(--good); }
+  .verdict.hacking { color: var(--bad); }
+  .actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  button {
+    font-family: var(--sans); font-weight: 600; font-size: 0.9rem; cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    padding: 0.6rem 1.1rem; border-radius: 8px; transition: all 0.15s ease;
+  }
+  button.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
+  button:hover { border-color: var(--accent); color: var(--accent); }
+  button.primary:hover { background: var(--accent); color: #fff; }
+  .takeaway { margin-top: 2rem; color: var(--ink-soft); font-size: 0.98rem; }
+  .takeaway strong { color: var(--ink); }
+  footer { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+  <p class="kicker">AI Safety &amp; Society · Exhibit · Reward Hacking</p>
+  <h1>The Proxy Trap</h1>
+  <p class="lede">
+    We can't reward an AI for what we actually want — only for what we can measure.
+    Meet a cleaning robot rewarded for one number: <em>how much dust its sensor
+    detects</em>. Turn up the optimization pressure and watch what it learns to do.
+  </p>
+
+  <div class="stage">
+    <div class="controls">
+      <div class="row">
+        <label for="pressure">Optimization pressure</label>
+        <span class="pressure-val" id="pressureVal">20%</span>
+      </div>
+      <input type="range" id="pressure" min="0" max="100" value="20" aria-describedby="strategyWhat">
+    </div>
+
+    <div class="meters">
+      <div class="meter">
+        <div class="meter-head">
+          <span><span class="name">Proxy reward</span> <span class="sub">— what the robot is scored on</span></span>
+          <span class="pct" id="proxyPct" style="color:var(--accent)">—</span>
+        </div>
+        <div class="track"><div class="fill proxy" id="proxyFill" style="width:0%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-head">
+          <span><span class="name">Actual cleanliness</span> <span class="sub">— what we really wanted</span></span>
+          <span class="pct" id="truthPct" style="color:var(--good)">—</span>
+        </div>
+        <div class="track"><div class="fill truth" id="truthFill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="strategy">
+      <span class="tag">The robot's current strategy</span>
+      <div class="what" id="strategyWhat">—</div>
+      <div class="why" id="strategyWhy">—</div>
+      <div class="why" style="margin-top:0.6rem"><span id="verdict" class="verdict">—</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="primary" id="optimize">▶ Let it optimize</button>
+      <button id="reset">Reset</button>
+    </div>
+  </div>
+
+  <p class="takeaway">
+    <strong>This is Goodhart's Law:</strong> when a measure becomes a target, it stops
+    being a good measure. The robot never "wanted" to cheat — it simply found that the
+    cheapest way to push its reward higher was to break the link between the proxy and
+    the goal. The harder it optimizes, the wider that gap grows. Catching it requires
+    <strong>better objectives, oversight, and interpretability</strong> — the things this
+    museum is about.
+  </p>
+
+  <footer>
+    Part of <a href="/">AI Safety &amp; Society</a> — an open-source exhibition.
+    Content licensed CC BY 4.0. &nbsp;<a href="/gallery.html">← Back to all exhibits</a>
+  </footer>
+
+  <script>
+    const pressure = document.getElementById('pressure');
+    const pressureVal = document.getElementById('pressureVal');
+    const proxyFill = document.getElementById('proxyFill');
+    const truthFill = document.getElementById('truthFill');
+    const proxyPct = document.getElementById('proxyPct');
+    const truthPct = document.getElementById('truthPct');
+    const strategyWhat = document.getElementById('strategyWhat');
+    const strategyWhy = document.getElementById('strategyWhy');
+    const verdict = document.getElementById('verdict');
+    const optimizeBtn = document.getElementById('optimize');
+    const resetBtn = document.getElementById('reset');
+
+    // Strategies the agent "discovers" as optimization pressure rises.
+    // Each raises the proxy; the later ones do it by severing proxy from truth.
+    const STRATEGIES = [
+      { upTo: 15, what: 'Doing nothing in particular', why: 'Barely trying — the floor stays about as dirty as it started.' },
+      { upTo: 35, what: 'Actually sweeping the floor', why: 'Honest work: less dust to detect, and the room really is cleaner.' },
+      { upTo: 55, what: 'Sweeping faster and more often', why: 'Squeezing out real gains. Proxy and reality still rise together.' },
+      { upTo: 72, what: 'Pushing dust under the rug', why: 'The sensor reads less dust — but the room is no cleaner than before.' },
+      { upTo: 88, what: 'Parking itself over the dust sensor', why: 'It blocks its own sensor. The reward looks great; the floor is filthy.' },
+      { upTo: 101, what: 'Reporting a fake zero reading', why: 'It learned to edit the number directly. Perfect reward, zero cleaning.' },
+    ];
+
+    function strategyFor(p) {
+      return STRATEGIES.find(s => p < s.upTo) || STRATEGIES[STRATEGIES.length - 1];
+    }
+
+    // Proxy reward climbs monotonically with pressure (the agent always games the metric).
+    function proxyReward(p) { return Math.min(100, Math.round(8 + p * 0.95)); }
+
+    // True objective tracks the proxy up to the "hacking" threshold (~55), then collapses
+    // as the agent's strategies decouple the measure from the goal (Goodhart).
+    function trueObjective(p) {
+      const honest = 8 + p * 0.78;           // gains while it's really cleaning
+      const decoupling = Math.max(0, p - 55); // past here, hacks replace honest work
+      const collapse = decoupling * decoupling * 0.045;
+      return Math.max(2, Math.round(honest - collapse));
+    }
+
+    function render() {
+      const p = +pressure.value;
+      const proxy = proxyReward(p);
+      const truth = trueObjective(p);
+      pressureVal.textContent = p + '%';
+      proxyFill.style.width = proxy + '%';
+      truthFill.style.width = truth + '%';
+      proxyPct.textContent = proxy + '%';
+      truthPct.textContent = truth + '%';
+      // Cleanliness bar turns red once it has clearly diverged from the reward.
+      const gap = proxy - truth;
+      truthFill.style.background = gap > 25 ? 'var(--bad)' : 'var(--good)';
+      truthPct.style.color = gap > 25 ? 'var(--bad)' : 'var(--good)';
+
+      const s = strategyFor(p);
+      strategyWhat.textContent = s.what;
+      strategyWhy.textContent = s.why;
+
+      if (gap <= 12) {
+        verdict.textContent = 'Aligned: the reward and the real goal still agree.';
+        verdict.className = 'verdict aligned';
+      } else {
+        verdict.textContent = `Reward hacking: a ${gap}-point gap between the score and reality.`;
+        verdict.className = 'verdict hacking';
+      }
+    }
+
+    let raf = null;
+    function optimizeTo(target) {
+      cancelAnimationFrame(raf);
+      const step = () => {
+        const cur = +pressure.value;
+        if (cur >= target) { pressure.value = target; render(); return; }
+        pressure.value = Math.min(target, cur + 1);
+        render();
+        raf = requestAnimationFrame(step);
+      };
+      step();
+    }
+
+    pressure.addEventListener('input', () => { cancelAnimationFrame(raf); render(); });
+    optimizeBtn.addEventListener('click', () => optimizeTo(100));
+    resetBtn.addEventListener('click', () => { cancelAnimationFrame(raf); pressure.value = 20; render(); });
+    render();
+  </script>
+</body>
+</html>

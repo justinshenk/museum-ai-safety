@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exhibits · AI Safety &amp; Society</title>
+<meta name="description" content="A growing, open-source collection of interactive exhibits making AI safety tangible. Browse them — or contribute your own.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafbfc; --surface: #ffffff; --ink: #0c1118; --ink-soft: #3d4654;
+    --ink-faint: #7a8494; --accent: #1f4dff; --accent-soft: rgba(31,77,255,0.08);
+    --line: rgba(12, 17, 24, 0.12);
+    --sans: 'Schibsted Grotesk', 'Helvetica Neue', sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+  header {
+    position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.9rem 0; }
+  .wordmark { font-weight: 700; font-size: 0.92rem; display: flex; align-items: center; gap: 0.6rem; }
+  .wordmark .mark { width: 22px; height: 22px; }
+  .wordmark-sub { font-family: var(--mono); font-weight: 400; font-size: 0.72rem; letter-spacing: 0.06em; color: var(--ink-faint); text-transform: uppercase; }
+  .nav-cta { font-weight: 600; font-size: 0.85rem; color: #fff; background: var(--ink); padding: 0.55rem 1.25rem; border-radius: 6px; transition: background 0.2s; }
+  .nav-cta:hover { background: var(--accent); }
+  .intro { padding: clamp(3rem, 8vh, 5rem) 0 clamp(1.5rem, 4vh, 2.5rem); }
+  .kicker { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); border: 1px solid rgba(31,77,255,0.22); padding: 0.4rem 0.85rem; border-radius: 999px; }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); letter-spacing: -0.03em; margin: 1.25rem 0 0.75rem; }
+  .intro p { color: var(--ink-soft); font-size: 1.1rem; max-width: 62ch; }
+  .filters { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.75rem 0 0; }
+  .chip { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.03em; text-transform: lowercase; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); padding: 0.4rem 0.8rem; border-radius: 999px; cursor: pointer; transition: all 0.15s; }
+  .chip:hover { border-color: var(--accent); color: var(--accent); }
+  .chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; padding: 2rem 0 3rem; }
+  .card { display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease; }
+  .card:hover { transform: translateY(-3px); border-color: rgba(31,77,255,0.4); box-shadow: 0 12px 30px rgba(12,17,24,0.08); }
+  .card .thumb { aspect-ratio: 16 / 10; background: var(--bg) center/cover no-repeat; border-bottom: 1px solid var(--line); }
+  .card .body { padding: 1.1rem 1.2rem 1.3rem; display: flex; flex-direction: column; flex: 1; }
+  .card .titleline { display: flex; align-items: center; gap: 0.5rem; }
+  .card h3 { font-size: 1.1rem; letter-spacing: -0.01em; }
+  .card .ext { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); border-radius: 4px; padding: 0.1rem 0.35rem; }
+  .card .summary { color: var(--ink-soft); font-size: 0.92rem; margin: 0.5rem 0 0.9rem; flex: 1; }
+  .card .meta { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+  .card .topic { font-family: var(--mono); font-size: 0.66rem; color: var(--accent); background: var(--accent-soft); padding: 0.15rem 0.5rem; border-radius: 999px; }
+  .card .by { font-family: var(--mono); font-size: 0.7rem; color: var(--ink-faint); margin-top: 0.7rem; }
+  .contribute { background: var(--ink); color: #fff; border-radius: 18px; padding: clamp(1.75rem, 5vw, 3rem); margin: 1rem 0 4rem; }
+  .contribute h2 { font-size: clamp(1.5rem, 4vw, 2.1rem); letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+  .contribute p { color: rgba(255,255,255,0.72); max-width: 60ch; margin-bottom: 1.25rem; }
+  .contribute a { display: inline-block; font-weight: 600; font-size: 0.9rem; background: #fff; color: var(--ink); padding: 0.65rem 1.3rem; border-radius: 8px; margin-right: 0.6rem; }
+  .contribute a.ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.35); }
+  .empty, .error { color: var(--ink-faint); font-family: var(--mono); font-size: 0.9rem; padding: 2rem 0; }
+  footer { border-top: 1px solid var(--line); padding: 2rem 0; font-size: 0.85rem; color: var(--ink-faint); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap topbar">
+    <a class="wordmark" href="/">
+      <svg class="mark" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="20" height="20" rx="5" stroke="#1f4dff" stroke-width="2"/>
+        <circle cx="11" cy="11" r="3.5" fill="#1f4dff"/>
+      </svg>
+      AI Safety &amp; Society <span class="wordmark-sub">· Exhibits</span>
+    </a>
+    <a class="nav-cta" href="https://github.com/justinshenk/museum-ai-safety#contributing">Contribute an exhibit</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <span class="kicker">Open-source collection</span>
+    <h1>Interactive exhibits</h1>
+    <p>
+      Hands-on pieces that make AI safety tangible — probe how systems learn, fail,
+      persuade, and decide. Everything here is open source. Browse the collection,
+      then <a href="https://github.com/justinshenk/museum-ai-safety#contributing" style="color:var(--accent);font-weight:600">add your own →</a>
+    </p>
+    <div class="filters" id="filters"></div>
+  </section>
+
+  <section class="grid" id="grid">
+    <div class="empty">Loading exhibits…</div>
+  </section>
+
+  <section class="contribute">
+    <h2>Build the next exhibit</h2>
+    <p>
+      An exhibit is a single self-contained interactive — no framework, no build step.
+      Copy the template, drop in your HTML, open a pull request. Externally-hosted
+      pieces are welcome too, via the registry.
+    </p>
+    <a href="https://github.com/justinshenk/museum-ai-safety/blob/main/CONTRIBUTING.md">How to contribute</a>
+    <a class="ghost" href="https://github.com/justinshenk/museum-ai-safety/tree/main/exhibits/_template">View the template</a>
+  </section>
+</main>
+
+<footer class="wrap">
+  AI Safety &amp; Society — An Exhibition · Berlin · Open Source ·
+  <a href="/" style="color:var(--accent)">Home</a>
+</footer>
+
+<script>
+  const grid = document.getElementById('grid');
+  const filtersEl = document.getElementById('filters');
+  let exhibits = [];
+  let activeTopic = null;
+
+  function cardHTML(ex) {
+    const href = ex.external ? ex.url : ex.path;
+    const target = ex.external ? ' target="_blank" rel="noopener"' : '';
+    const thumb = ex.thumbnail || '';
+    const topics = (ex.topics || []).map(t => `<span class="topic">${t}</span>`).join('');
+    const by = ex.author?.name ? `by ${ex.author.name}` : '';
+    const ext = ex.external ? '<span class="ext">external ↗</span>' : '';
+    return `
+      <a class="card" href="${href}"${target}>
+        <div class="thumb" style="background-image:url('${thumb.replace(/'/g, "%27")}')"></div>
+        <div class="body">
+          <div class="titleline"><h3>${ex.title}</h3>${ext}</div>
+          <p class="summary">${ex.summary || ''}</p>
+          <div class="meta">${topics}</div>
+          <div class="by">${by}</div>
+        </div>
+      </a>`;
+  }
+
+  function render() {
+    const shown = activeTopic ? exhibits.filter(e => (e.topics || []).includes(activeTopic)) : exhibits;
+    grid.innerHTML = shown.length
+      ? shown.map(cardHTML).join('')
+      : '<div class="empty">No exhibits match that topic yet — be the first to add one.</div>';
+  }
+
+  function buildFilters() {
+    const topics = [...new Set(exhibits.flatMap(e => e.topics || []))].sort();
+    filtersEl.innerHTML = [`<button class="chip active" data-topic="">all</button>`]
+      .concat(topics.map(t => `<button class="chip" data-topic="${t}">${t}</button>`)).join('');
+    filtersEl.querySelectorAll('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        activeTopic = chip.dataset.topic || null;
+        filtersEl.querySelectorAll('.chip').forEach(c => c.classList.toggle('active', c === chip));
+        render();
+      });
+    });
+  }
+
+  fetch('exhibits.json')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      exhibits = data.exhibits || [];
+      if (!exhibits.length) { grid.innerHTML = '<div class="empty">No exhibits yet — the collection is just getting started.</div>'; return; }
+      buildFilters();
+      render();
+    })
+    .catch(err => {
+      grid.innerHTML = `<div class="error">Couldn't load exhibits.json (${err.message}). If you're viewing files directly, run a local server: <code>python3 -m http.server</code></div>`;
+    });
+</script>
+</body>
+</html>

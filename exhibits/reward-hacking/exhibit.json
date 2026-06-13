@@ -1,0 +1,14 @@
+{
+  "title": "The Proxy Trap",
+  "slug": "reward-hacking",
+  "summary": "Crank up the optimization pressure and watch a cleaning robot maximize the reward it can measure while the goal you actually wanted falls apart.",
+  "topics": ["reward-hacking", "alignment"],
+  "author": {
+    "name": "AI Safety & Society",
+    "url": "https://museum-ai-safety.vercel.app"
+  },
+  "thumbnail": "thumbnail.svg",
+  "entry": "index.html",
+  "license": "CC-BY-4.0",
+  "added": "2026-06-13"
+}

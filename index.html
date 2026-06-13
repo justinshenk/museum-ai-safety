@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Safety &amp; Society — An Exhibition · Become a Founding Volunteer</title>
+<meta name="description" content="An open-source exhibition in Berlin making AI safety tangible for everyone. We're assembling our founding volunteer team — join us.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafbfc;
+    --surface: #ffffff;
+    --ink: #0c1118;
+    --ink-soft: #3d4654;
+    --ink-faint: #7a8494;
+    --accent: #1f4dff;
+    --accent-deep: #0e36d4;
+    --accent-soft: rgba(31, 77, 255, 0.08);
+    --line: rgba(12, 17, 24, 0.12);
+    --line-strong: rgba(12, 17, 24, 0.8);
+    --sans: 'Schibsted Grotesk', 'Helvetica Neue', sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: #fff; }
+
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 3rem);
+  }
+
+  /* ——— Top bar ——— */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+  .wordmark {
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    white-space: nowrap;
+  }
+  .wordmark .mark {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+  }
+  .wordmark-sub {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .topbar-cta {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: #fff;
+    background: var(--ink);
+    padding: 0.55rem 1.25rem;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+  }
+  .topbar-cta:hover { background: var(--accent); }
+  .topbar-nav { display: flex; align-items: center; gap: 1.25rem; }
+  .topbar-link {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+  .topbar-link:hover { color: var(--accent); }
+
+  /* ——— Hero ——— */
+  .hero {
+    position: relative;
+    padding: clamp(4.5rem, 12vh, 8.5rem) 0 clamp(3.5rem, 9vh, 6.5rem);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(ellipse 800px 500px at 85% -10%, rgba(31, 77, 255, 0.07), transparent 60%),
+      radial-gradient(circle, var(--line) 1px, transparent 1px);
+    background-size: auto, 28px 28px;
+    mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
+  }
+  .hero-inner { position: relative; }
+  .hero-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid rgba(31, 77, 255, 0.22);
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: clamp(1.75rem, 4vh, 2.5rem);
+  }
+  .hero-kicker .dot {
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.65); opacity: 0.5; }
+  }
+  .hero h1 {
+    font-weight: 600;
+    font-size: clamp(2.5rem, 6.4vw, 5rem);
+    line-height: 1.06;
+    letter-spacing: -0.03em;
+    max-width: 20ch;
+  }
+  .hero h1 .acc { color: var(--accent); }
+  .hero-sub {
+    margin-top: clamp(1.5rem, 3.5vh, 2.25rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: end;
+  }
+  .hero-sub p {
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 50ch;
+  }
+  .hero-cta-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    justify-self: end;
+  }
+  .btn-primary {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    color: #fff;
+    background: var(--accent);
+    padding: 1rem 1.9rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-primary:hover {
+    background: var(--accent-deep);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(31, 77, 255, 0.3);
+  }
+  .btn-primary .arrow { transition: transform 0.2s ease; }
+  .btn-primary:hover .arrow { transform: translateY(3px); }
+  .cta-note {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+  .hero-meta {
+    margin-top: clamp(2.5rem, 6vh, 4rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  /* Hero load animation */
+  .reveal-load {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: rise 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.16s; }
+  .d3 { animation-delay: 0.3s; }
+  .d4 { animation-delay: 0.44s; }
+  .d5 { animation-delay: 0.58s; }
+  @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+
+  /* ——— Section scaffolding ——— */
+  section { padding: clamp(3.5rem, 9vh, 6rem) 0; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.25rem;
+    margin-bottom: clamp(2rem, 5vh, 3rem);
+  }
+  .section-head .num {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .section-head h2 {
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ——— 01 Invitation ——— */
+  .invitation-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+  .invitation-grid h3 {
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.6vw, 2rem);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .invitation-grid h3 .acc { color: var(--accent); }
+  .invitation-aside p {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    margin-bottom: 1.1rem;
+  }
+  .invitation-aside p:last-child { margin-bottom: 0; }
+  .invitation-aside strong { color: var(--ink); font-weight: 600; }
+
+  /* ——— 02 What we're building ——— */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover {
+    border-color: rgba(31, 77, 255, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(12, 17, 24, 0.07);
+  }
+  .card .cat {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .card h3 {
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+  .card p {
+    color: var(--ink-soft);
+    font-size: 0.94rem;
+    flex-grow: 1;
+  }
+
+  /* ——— Topics ——— */
+  .topics {
+    margin-top: clamp(1.75rem, 4vh, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .topics-label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .topics-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+  .topic {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid rgba(31, 77, 255, 0.25);
+    border-radius: 999px;
+    color: var(--accent-deep);
+    background: var(--accent-soft);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .topic:hover {
+    background: rgba(31, 77, 255, 0.14);
+    border-color: rgba(31, 77, 255, 0.45);
+  }
+
+  /* ——— 03 Roles ——— */
+  .roles-section { padding-top: clamp(5rem, 13vh, 9rem); }
+  .roles-intro {
+    max-width: 58ch;
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    color: var(--ink-soft);
+    margin-bottom: clamp(2rem, 4vh, 2.75rem);
+  }
+  .roles-intro strong { color: var(--ink); font-weight: 600; }
+  .roles { display: flex; flex-direction: column; }
+  .role {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) minmax(0, 1.5fr) auto;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    align-items: baseline;
+    padding: 1.35rem 0;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+  }
+  .role:last-child { border-bottom: 1px solid var(--line); }
+  .role:hover { padding-left: 0.9rem; }
+  .role::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transition: transform 0.25s ease;
+  }
+  .role:hover::before { transform: scaleY(1); }
+  .role .r-num {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+  }
+  .role h3 {
+    font-weight: 600;
+    font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .role p {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+  }
+  .role .r-go {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    transition: color 0.2s ease;
+    white-space: nowrap;
+  }
+  .role:hover .r-go { color: var(--accent); }
+  .roles-reassure {
+    margin-top: clamp(1.75rem, 4vh, 2.5rem);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    padding: 0.5rem 0.95rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    background: var(--surface);
+  }
+
+  /* ——— Epigraph ——— */
+  .epigraph {
+    text-align: center;
+    padding: clamp(3rem, 8vh, 5rem) 0;
+  }
+  .epigraph blockquote {
+    font-weight: 500;
+    font-size: clamp(1.7rem, 4vw, 3rem);
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    max-width: 22ch;
+    margin: 0 auto;
+  }
+  .epigraph blockquote .acc { color: var(--accent); }
+  /* ——— Team ——— */
+  .team-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: clamp(1.5rem, 3vw, 2rem);
+    max-width: 560px;
+    margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+  }
+  .team-card .avatar {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 1px solid rgba(31, 77, 255, 0.25);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .team-card h3 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+  .team-card .t-role {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .team-card p {
+    color: var(--ink-soft);
+    font-size: 0.92rem;
+    margin-top: 0.3rem;
+  }
+  .team-card a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .team-card a:hover { text-decoration: underline; }
+
+  /* ——— 04 Partners ——— */
+  .partners-band {
+    background: var(--ink);
+    color: #f5f7fa;
+    padding: clamp(3.5rem, 9vh, 6rem) 0;
+  }
+  .partners-band .section-head h2 { color: #f5f7fa; }
+  .partners-lede {
+    font-weight: 400;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    line-height: 1.55;
+    max-width: 44ch;
+    color: rgba(245, 247, 250, 0.75);
+    margin-bottom: clamp(2.25rem, 5vh, 3.25rem);
+  }
+  .partner-list { display: flex; flex-direction: column; }
+  .partner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba(245, 247, 250, 0.16);
+    text-decoration: none;
+    color: #f5f7fa;
+    transition: padding-left 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .partner:last-child { border-bottom: 1px solid rgba(245, 247, 250, 0.16); }
+  .partner:hover { padding-left: 0.9rem; }
+  .partner .p-name {
+    font-weight: 500;
+    font-size: clamp(1.5rem, 3vw, 2.3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    transition: color 0.2s ease;
+  }
+  .partner:hover .p-name { color: #7d9bff; }
+  .partner .p-desc {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245, 247, 250, 0.5);
+  }
+
+  /* ——— 05 Sign up ——— */
+  .signup { padding-bottom: clamp(4rem, 10vh, 7rem); }
+  .signup-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: end;
+    margin-bottom: clamp(2rem, 5vh, 3rem);
+  }
+  .signup-head h2 {
+    font-weight: 600;
+    font-size: clamp(2rem, 4.2vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  .signup-head h2 .acc { color: var(--accent); }
+  .signup-head p { color: var(--ink-soft); max-width: 42ch; }
+  .form-frame {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    max-width: 760px;
+    margin: 0 auto;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(12, 17, 24, 0.06);
+  }
+  .form-frame::before {
+    content: 'APPLICATION — FOUNDING VOLUNTEER';
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-faint);
+    background: var(--bg);
+  }
+  .form-frame iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
+  .form-fallback {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--ink-faint);
+  }
+  .form-fallback a {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .form-fallback a:hover { color: var(--accent-deep); text-decoration: underline; }
+
+  /* ——— Footer ——— */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2.5rem 0 3rem;
+  }
+  .foot-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.5rem 3rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .foot-grid a { color: inherit; text-decoration: none; }
+  .foot-grid a:hover { color: var(--accent); }
+
+  /* ——— Responsive ——— */
+  @media (max-width: 900px) {
+    .hero-sub { grid-template-columns: 1fr; }
+    .hero-cta-block { justify-self: start; }
+    .invitation-grid { grid-template-columns: 1fr; }
+    .cards { grid-template-columns: 1fr; }
+    .role {
+      grid-template-columns: auto minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      row-gap: 0.4rem;
+    }
+    .role p { grid-column: 2; }
+    .role .r-go { grid-column: 2; }
+    .signup-head { grid-template-columns: 1fr; align-items: start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal-load, .reveal { opacity: 1; transform: none; animation: none; transition: none; }
+    .hero-kicker .dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap topbar">
+    <a class="wordmark" href="#top">
+      <svg class="mark" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="20" height="20" rx="5" stroke="#1f4dff" stroke-width="2"/>
+        <circle cx="11" cy="11" r="3.5" fill="#1f4dff"/>
+      </svg>
+      AI Safety &amp; Society <span class="wordmark-sub">· An Exhibition</span>
+    </a>
+    <nav class="topbar-nav">
+      <a class="topbar-link" href="/gallery.html">Exhibits</a>
+      <a class="topbar-cta" href="#volunteer">Volunteer</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="wrap hero-inner">
+      <span class="hero-kicker reveal-load d1"><span class="dot"></span>Now assembling the founding team</span>
+      <h1 class="reveal-load d2">Help build the first exhibition on <span class="acc">AI safety</span> &amp; society.</h1>
+      <div class="hero-sub">
+        <p class="reveal-load d3">Artificial intelligence is reshaping how we live, work, and decide together. We're creating an interactive exhibition in Berlin where anyone can experience AI up close — question how it works, see where it fails, and understand what's at stake. We're looking for founding volunteers to build the exhibition with us.</p>
+        <div class="hero-cta-block reveal-load d4">
+          <a class="btn-primary" href="#volunteer">Become a Founding Volunteer <span class="arrow">↓</span></a>
+          <span class="cta-note">2–5 hrs/week · No museum experience needed</span>
+        </div>
+      </div>
+      <div class="hero-meta reveal-load d5">
+        <span>Est. 2026</span>
+        <span>Berlin</span>
+        <span>Open source</span>
+        <span>With Foresight Institute · Berlin AI Safety Office · Æthos · AI Salon Berlin</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 INVITATION -->
+  <section class="wrap reveal">
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>The invitation</h2>
+    </div>
+    <div class="invitation-grid">
+      <h3>The conversation about AI's risks and promises happens in papers, labs, and policy rooms. <span class="acc">The public deserves a place in it.</span></h3>
+      <div class="invitation-aside">
+        <p><strong>AI Safety &amp; Society</strong> is a hands-on exhibition: interactive installations, public programs, and education that make the most consequential technology of our time tangible — something anyone can walk into.</p>
+        <p>And it will be <strong>open source from the start</strong>: our exhibitions, research, designs, and code published openly, so any community anywhere can adapt, remix, and build on what we make.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 WHAT WE'RE BUILDING -->
+  <section class="wrap reveal">
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>What we're building</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <span class="cat">The Exhibition</span>
+        <h3>Interactive installations that make the invisible visible</h3>
+        <p>Hands-on installations where visitors probe how AI systems learn, fail, persuade, and decide — and what alignment, interpretability, and oversight actually mean in practice.</p>
+      </div>
+      <div class="card">
+        <span class="cat">Public Programs</span>
+        <h3>A civic forum for the questions that matter</h3>
+        <p>Talks, debates, and workshops that bring researchers, policymakers, artists, and neighbors into the same room — turning AI safety from an insider topic into a public conversation.</p>
+      </div>
+      <div class="card">
+        <span class="cat">Education</span>
+        <h3>Learning for the next generation of decision-makers</h3>
+        <p>School programs and open resources that equip students and educators to reason about AI's societal impact — critically, concretely, and without hype or doom.</p>
+      </div>
+    </div>
+    <div class="topics">
+      <span class="topics-label">Topics we'll explore</span>
+      <div class="topics-list">
+        <span class="topic">Alignment</span>
+        <span class="topic">Interpretability</span>
+        <span class="topic">Deception &amp; persuasion</span>
+        <span class="topic">Deepfakes &amp; misinformation</span>
+        <span class="topic">Bias &amp; fairness</span>
+        <span class="topic">Autonomy &amp; human oversight</span>
+        <span class="topic">AI governance &amp; policy</span>
+        <span class="topic">Work &amp; the economy</span>
+        <span class="topic">Human–AI relationships</span>
+        <span class="topic">Catastrophic &amp; existential risk</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 ROLES -->
+  <section class="wrap reveal roles-section">
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>Where you come in</h2>
+    </div>
+    <p class="roles-intro">You don't need museum experience — <strong>you need curiosity and a few hours a week.</strong> Whatever your background, there's a way to leave your mark on this institution. Founding volunteers work directly with the core team and our partner network.</p>
+    <div class="roles">
+      <a class="role" href="#volunteer">
+        <span class="r-num">A</span>
+        <h3>Exhibition &amp; Experience Design</h3>
+        <p>Prototype installations and interactives. For designers, artists, makers, and engineers who want their work walked through, not scrolled past.</p>
+        <span class="r-go">Sign up →</span>
+      </a>
+      <a class="role" href="#volunteer">
+        <span class="r-num">B</span>
+        <h3>Research &amp; Curation</h3>
+        <p>Translate AI safety research into stories and artifacts the public can grasp. For researchers, writers, and students close to the field.</p>
+        <span class="r-go">Sign up →</span>
+      </a>
+      <a class="role" href="#volunteer">
+        <span class="r-num">C</span>
+        <h3>Programs &amp; Events</h3>
+        <p>Shape and host talks, workshops, and community evenings. For organizers and connectors who make rooms come alive.</p>
+        <span class="r-go">Sign up →</span>
+      </a>
+      <a class="role" href="#volunteer">
+        <span class="r-num">D</span>
+        <h3>Communications &amp; Story</h3>
+        <p>Give the museum its public voice — web, social, press, and beyond. For writers, photographers, and storytellers.</p>
+        <span class="r-go">Sign up →</span>
+      </a>
+      <a class="role" href="#volunteer">
+        <span class="r-num">E</span>
+        <h3>Operations &amp; Partnerships</h3>
+        <p>Help with fundraising, logistics, and institution-building behind the scenes. For people who like turning ideas into working organizations.</p>
+        <span class="r-go">Sign up →</span>
+      </a>
+    </div>
+    <div class="roles-reassure">
+      <span class="chip">2–5 hrs / week</span>
+      <span class="chip">Remote-friendly</span>
+      <span class="chip">Based anywhere, rooted in Berlin</span>
+      <span class="chip">No prior experience required</span>
+      <span class="chip">Students welcome</span>
+      <span class="chip">Everything we build is open source</span>
+    </div>
+  </section>
+
+  <!-- EPIGRAPH -->
+  <section class="epigraph wrap reveal">
+    <blockquote>
+      interact : <span class="acc">resonate</span> : connect
+    </blockquote>
+  </section>
+
+  <!-- 04 TEAM -->
+  <section class="wrap reveal">
+    <div class="section-head">
+      <span class="num">04</span>
+      <h2>Who's behind this</h2>
+    </div>
+    <div class="team-card">
+      <img class="avatar" src="justin.png" alt="Justin Shenk">
+      <div>
+        <span class="t-role">Organizer</span>
+        <h3>Justin Shenk</h3>
+        <p>AI researcher and community builder in Berlin. <a href="https://justinshenk.com" target="_blank" rel="noopener">justinshenk.com →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 PARTNERS -->
+  <section class="partners-band reveal">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="num">05</span>
+        <h2>Partners</h2>
+      </div>
+      <p class="partners-lede">Bring art to life — alongside organizations advancing safe and beneficial technology futures.</p>
+      <div class="partner-list">
+        <a class="partner" href="https://foresight.org" target="_blank" rel="noopener">
+          <span class="p-name">Foresight Institute</span>
+          <span class="p-desc">Advancing frontier science &amp; technology</span>
+        </a>
+        <div class="partner">
+          <span class="p-name">Berlin AI Safety Office</span>
+          <span class="p-desc">AI safety hub, Berlin</span>
+        </div>
+        <div class="partner">
+          <span class="p-name">Æthos</span>
+          <span class="p-desc">Ethics &amp; emerging technology</span>
+        </div>
+        <a class="partner" href="https://aisalon.substack.com/p/the-meaning-machine-how-ai-challenges" target="_blank" rel="noopener">
+          <span class="p-name">AI Salon Berlin</span>
+          <span class="p-desc">Community &amp; conversation, Berlin</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 SIGN UP -->
+  <section class="signup wrap reveal" id="volunteer">
+    <div class="section-head">
+      <span class="num">06</span>
+      <h2>Join us</h2>
+    </div>
+    <div class="signup-head">
+      <h2>Become a <span class="acc">founding volunteer.</span></h2>
+      <p>Tell us a little about yourself and what you'd love to work on. We read every submission and reply personally — usually within a week.</p>
+    </div>
+    <div class="form-frame">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSckGPa53Gh9MHLsXTkYyg_25DlB224IwXPU-QxoMdaZR34zOw/viewform?embedded=true" height="1978" title="Volunteer sign-up form" loading="lazy">Loading…</iframe>
+    </div>
+    <p class="form-fallback">Form not loading? <a href="https://docs.google.com/forms/d/e/1FAIpQLSckGPa53Gh9MHLsXTkYyg_25DlB224IwXPU-QxoMdaZR34zOw/viewform" target="_blank" rel="noopener">Open it directly →</a></p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <span>AI Safety &amp; Society — An Exhibition</span>
+    <span>Berlin · Est. 2026 · Open Source</span>
+    <span>With Foresight Institute · Berlin AI Safety Office · Æthos · AI Salon Berlin</span>
+    <a href="#volunteer">Volunteer ↑</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
