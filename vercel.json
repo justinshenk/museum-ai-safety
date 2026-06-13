@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "node scripts/build-gallery.mjs",
-  "outputDirectory": ".",
-  "cleanUrls": true
+  "outputDirectory": "."
 }
