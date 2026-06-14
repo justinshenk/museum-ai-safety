@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="glow" cx="86%" cy="-8%" r="75%">
+      <stop offset="0%" stop-color="#1f4dff" stop-opacity="0.14"/>
+      <stop offset="60%" stop-color="#1f4dff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.5" fill="#0c1118" fill-opacity="0.07"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#fafbfc"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#1f4dff"/>
+
+  <!-- wordmark -->
+  <g transform="translate(80, 74)">
+    <rect x="0" y="0" width="44" height="44" rx="11" fill="none" stroke="#1f4dff" stroke-width="4"/>
+    <circle cx="22" cy="22" r="7.5" fill="#1f4dff"/>
+  </g>
+  <text x="140" y="95" font-family="'Helvetica Neue',Arial,sans-serif" font-size="27" font-weight="700" fill="#0c1118">AI Safety &amp; Society</text>
+  <text x="140" y="124" font-family="'Courier New',monospace" font-size="15" letter-spacing="3" fill="#7a8494">· AN EXHIBITION</text>
+
+  <!-- kicker -->
+  <text x="82" y="248" font-family="'Courier New',monospace" font-size="21" letter-spacing="4" fill="#1f4dff">OPEN-SOURCE EXHIBITION · BERLIN · EST. 2026</text>
+
+  <!-- headline -->
+  <text x="76" y="338" font-family="'Helvetica Neue',Arial,sans-serif" font-size="76" font-weight="700" letter-spacing="-2" fill="#0c1118">Making AI safety</text>
+  <text x="76" y="424" font-family="'Helvetica Neue',Arial,sans-serif" font-size="76" font-weight="700" letter-spacing="-2" fill="#0c1118">something you can <tspan fill="#1f4dff">touch</tspan>.</text>
+
+  <!-- subline -->
+  <text x="82" y="494" font-family="'Helvetica Neue',Arial,sans-serif" font-size="27" fill="#3d4654">Interactive exhibits anyone can walk into — and help build.</text>
+
+  <!-- footer -->
+  <text x="82" y="566" font-family="'Courier New',monospace" font-size="21" fill="#7a8494">museum-ai-safety.vercel.app</text>
+</svg>
