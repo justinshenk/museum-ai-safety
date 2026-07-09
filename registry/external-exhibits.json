@@ -2,7 +2,7 @@
   {
     "title": "The Evolution of Trust",
     "slug": "evolution-of-trust",
-    "summary": "Nicky Case's classic playable on game theory, cooperation, and why trust breaks down — a touchstone for thinking about multi-agent incentives.",
+    "summary": "Nicky Case's classic playable on game theory, cooperation, and why trust breaks down. A touchstone for thinking about multi-agent incentives.",
     "topics": [
       "governance",
       "relationships",
@@ -475,5 +475,23 @@
     "url": "https://pair.withgoogle.com/explorables/private-and-fair/",
     "license": "Apache-2.0",
     "added": "2022-02-01"
+  },
+  {
+    "title": "We Need to Talk: The AI Voice Game",
+    "slug": "we-need-to-talk",
+    "summary": "CivAI's interactive voice game: hold difficult conversations with AI characters and feel, at a gut level, what today's AI can do, and the hard choices ahead as it grows more capable.",
+    "topics": [
+      "persuasion",
+      "relationships",
+      "autonomy"
+    ],
+    "author": {
+      "name": "CivAI (Civic AI Security Program)",
+      "url": "https://civai.org"
+    },
+    "thumbnail": "https://museum-ai-safety.vercel.app/favicon.svg",
+    "url": "https://civai.org/talk",
+    "license": "All rights reserved",
+    "added": "2026-06-18"
   }
 ]
