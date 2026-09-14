@@ -329,7 +329,7 @@
     </div>
     <div class="submit-row">
       <a class="btn-primary" href="#" data-form>Open the pitch form <span class="arrow">→</span></a>
-      <span class="cta-note">Form goes live 18 September · Questions to <a href="mailto:hello@aisafety.museum" style="color:var(--accent)">hello@aisafety.museum</a></span>
+      <span class="cta-note">Questions to <a href="mailto:hello@aisafety.museum" style="color:var(--accent)">hello@aisafety.museum</a></span>
     </div>
   </section>
 
@@ -422,7 +422,7 @@
 
   // Channel tracking: ?ref=eaforum on this page becomes a prefilled hidden Source field on the pitch form.
   (function () {
-    var FORM = ''; // paste the Airtable form URL here, e.g. https://airtable.com/appXXXX/shrYYYY
+    var FORM = 'https://airtable.com/appSYgy9QnKRXIcGw/pagPm2dnFWkV5Rg4d/form';
     var q = new URLSearchParams(location.search);
     var ref = q.get('ref') || q.get('utm_source') || '';
     try { if (ref) localStorage.setItem('ref', ref); else ref = localStorage.getItem('ref') || ''; } catch (e) {}
