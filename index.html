@@ -649,6 +649,13 @@
     .signup-head { grid-template-columns: 1fr; align-items: start; }
   }
 
+
+  @media (max-width: 640px) {
+    .wordmark-sub { display: none; }
+    .topbar { flex-wrap: wrap; row-gap: 0.65rem; }
+    .topbar-nav { width: 100%; justify-content: flex-start; gap: 1rem; }
+    .topbar-nav .topbar-cta { margin-left: auto; }
+  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .reveal-load, .reveal { opacity: 1; transform: none; animation: none; transition: none; }
