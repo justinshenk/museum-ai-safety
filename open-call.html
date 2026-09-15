@@ -155,6 +155,10 @@
   .faq details[open] summary::after { content: '–'; }
   .faq details p { color: var(--ink-soft); font-size: 0.95rem; padding: 0 0 1.2rem; max-width: 62ch; }
 
+  /* Volunteer callout */
+  .volunteer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem 2rem; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: clamp(1.5rem, 3vw, 2rem); }
+  .volunteer h3 { font-weight: 600; font-size: 1.25rem; letter-spacing: -0.015em; margin-bottom: 0.3rem; }
+  .volunteer p { color: var(--ink-soft); font-size: 0.95rem; max-width: 52ch; }
   /* Footer */
   footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; }
   .foot-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem 3rem; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); }
@@ -404,6 +408,17 @@
             <details><summary>Can I use AI tools to make the work?</summary><p>Yes, and please disclose it. Works about AI that are partly made with AI can be more interesting for it, as long as the claims are accurate.</p></details>
       <details><summary>What happens to my work afterwards?</summary><p>Physical works go back to you. Digital works stay in the exhibition's rotation for later venues unless you withdraw. If you opt in, they also join the open-source kit other cities can stage.</p></details>
       <details><summary>Is there a fee or budget?</summary><p>No fee to submit. The pilot is volunteer-run and currently unfunded, so stipends depend on grants in progress. We'll be straight with you about what we can cover.</p></details>
+    </div>
+  </section>
+
+  <!-- VOLUNTEER -->
+  <section class="wrap reveal">
+    <div class="volunteer">
+      <div>
+        <h3>Not pitching? Help us build it.</h3>
+        <p>We need screeners, installers, venue hosts, and people to talk to visitors. A few hours a week, no museum experience needed.</p>
+      </div>
+      <a class="btn-ghost" href="/#volunteer">Become a volunteer →</a>
     </div>
   </section>
 
