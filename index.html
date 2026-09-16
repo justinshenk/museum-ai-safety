@@ -214,6 +214,46 @@
   }
   .btn-primary .arrow { transition: transform 0.2s ease; }
   .btn-primary:hover .arrow { transform: translateY(3px); }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn-secondary {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: transparent;
+    border: 1.5px solid var(--line-strong);
+    padding: calc(1rem - 1.5px) calc(1.9rem - 1.5px);
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  }
+  .btn-secondary:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+  .dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 2.75rem;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .dates > * { display: inline-flex; gap: 0.7rem; align-items: baseline; text-decoration: none; color: inherit; }
+  .dates .d { color: var(--ink); font-weight: 600; }
+  .dates a:hover .l { color: var(--accent); }
+  .support {
+    margin-top: clamp(2rem, 4vh, 3rem);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 60ch;
+    color: rgba(245, 247, 250, 0.75);
+  }
+  .support a { color: #fff; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
   .cta-note {
     font-family: var(--mono);
     font-size: 0.7rem;
@@ -693,17 +733,27 @@
       <div class="hero-sub">
         <p class="reveal-load d3">Artificial intelligence is reshaping how we live, work, and decide together. We're creating an interactive exhibition in Berlin where anyone can experience AI up close: see what it can do, where it fails, and what's at stake. We're looking for volunteers and exhibit creators to build it with us.</p>
         <div class="hero-cta-block reveal-load d4">
-          <a class="btn-primary" href="#volunteer">Become a Founding Volunteer <span class="arrow">↓</span></a>
-          <span class="cta-note">2–5 hrs/week · Remote-friendly</span>
+          <div class="hero-btns">
+            <a class="btn-primary" href="/open-call.html">Submit a pitch <span class="arrow">→</span></a>
+            <a class="btn-secondary" href="#volunteer">Volunteer <span class="arrow">↓</span></a>
+          </div>
+          <span class="cta-note">Pitches due 12 Oct · Volunteers 2–5 hrs/week, remote-friendly</span>
         </div>
       </div>
       <div class="hero-meta reveal-load d5">
-        <span>Est. 2026</span>
-        <span>Berlin</span>
+        <span>EAGx Berlin · Mid November 2026</span>
+        <span>Foresight Institute Berlin Node</span>
+        <span>AI Safety Berlin</span>
         <span>Open source</span>
-        <span>With Foresight Institute · AI Safety Berlin · Æthos · AI Salon Berlin</span>
       </div>
     </div>
+  </div>
+
+  <div class="dates wrap">
+    <a href="/open-call.html"><span class="d">Now</span><span class="l">Open call for exhibits</span></a>
+    <a href="/open-call.html"><span class="d">12 Oct</span><span class="l">Pitches due</span></a>
+    <span><span class="d">Mid Nov</span><span class="l">Opening at EAGx Berlin</span></span>
+    <a href="#volunteer"><span class="d">Ongoing</span><span class="l">Volunteers welcome</span></a>
   </div>
 
   <!-- 01 INVITATION -->
@@ -866,6 +916,7 @@
           <span class="p-desc">Community &amp; conversation, Berlin</span>
         </a>
       </div>
+      <p class="support">The pilot is volunteer-run and fundraising. Fund a creator stipend, cover equipment, or host a venue: <a href="mailto:hello@aisafety.museum">hello@aisafety.museum</a>.</p>
     </div>
   </section>
 
