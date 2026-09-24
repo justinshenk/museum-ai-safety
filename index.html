@@ -289,6 +289,8 @@
 
   /* Section scaffolding */
   section { padding: clamp(3.5rem, 9vh, 6rem) 0; }
+  section.wrap { padding-block: clamp(3.5rem, 9vh, 6rem); }
+  section.epigraph.wrap { padding-block: clamp(2.5rem, 7vh, 5rem); }
   .section-head {
     display: flex;
     align-items: baseline;
@@ -691,6 +693,10 @@
 
 
   @media (max-width: 640px) {
+    section.wrap { padding-block: 2.75rem; }
+    section.epigraph.wrap { padding-block: 1.75rem; }
+    .dates { gap: 0.55rem 2rem; padding-block: 0.9rem; }
+    .section-head { margin-bottom: 1.5rem; }
     .wordmark-sub { display: none; }
     .topbar { flex-wrap: wrap; row-gap: 0.65rem; }
     .topbar-nav { width: 100%; justify-content: flex-start; gap: 1rem; }
